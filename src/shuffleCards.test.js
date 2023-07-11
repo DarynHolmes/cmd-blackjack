@@ -13,8 +13,6 @@ it("should return a new pack of shuffled cards", async() => {
   }}));
   const deckId = await shuffleCards();
   const expected = { shuffled: true, remaining: 52, deckId: 'abcd' };
-  // given
-  // when
   const actual = await shuffleCards();
   // then
   expect(actual).toEqual(expected);
@@ -23,10 +21,7 @@ it("should return a new pack of shuffled cards", async() => {
 it('return a unique deckId', async() => {
   axios.get.mockReturnValueOnce(Promise.resolve({ data:shuffledDeckOne}))
   .mockReturnValueOnce(Promise.resolve({ data: shuffledDeckTwo}))
-  // given
-  // when
   const deckOne = await shuffleCards();
   const deckTwo = await shuffleCards();
-  // then
   expect(deckOne.deckId).not.toBe(deckTwo.deckId)
 })
