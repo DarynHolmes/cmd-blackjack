@@ -1,0 +1,22 @@
+{
+  "name": "cmd-blackjack",
+  "version": "1.0.0",
+  "description": "get a pack of shuffled cards cards are dealt to user and dealer user chooses to hit to get a new card or stick with their current cards dealer hits until the sum of their cards are 17+ show the result of the game",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarynHolmes/cmd-blackjack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarynHolmes/cmd-blackjack/issues"
+  },
+  "homepage": "https://github.com/DarynHolmes/cmd-blackjack#readme",
+  "devDependencies": {
+    "jest": "^29.6.1"
+  }
+}
