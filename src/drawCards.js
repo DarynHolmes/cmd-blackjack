@@ -4,10 +4,10 @@ const axios = require("axios");
 
 // console.log('URL', url)
 const drawOneCard = (deckId) => {
-  console.log("DECK ID", deckId);
-  axios(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(
-    (response) => console.log(response.data.cards)
+  const p = axios(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`).then(
+    (response) => response.data.cards
   );
+  return p
 };
 
 module.exports = drawOneCard;
