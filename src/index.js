@@ -20,15 +20,21 @@ function printHand(cards) {
   console.log(handToString(cards));
 }
 
+function checkForWinner() {}
+
+function scoreForHand(hand) {}
+
 const run = async () => {
   const playersHand = [];
+  const dealersHand = [];
   console.log("Welcome to Black Jack");
-  console.log("Dealing Cards");
+  console.log("Dealing Cards...");
   // console.log("These are your two cards");
   const cardData = await shuffleCards();
   const playerFirstCard = await drawOneCard(cardData.deckId);
   const dealerFirstCard = await drawOneCard(cardData.deckId);
   const playerSecondCard = await drawOneCard(cardData.deckId);
+  const dealerSecondCard = await drawOneCard(cardData.deckId);
   playersHand.push(playerFirstCard);
   playersHand.push(playerSecondCard);
   console.log("Players Cards");
@@ -36,9 +42,9 @@ const run = async () => {
   // console.log(handToString(playersHand));
   // console.log(formatCard(playerFirstCard));
   // console.log(formatCard(playerSecondCard));
-
+  dealersHand.push(dealerFirstCard);
   console.log("Dealers Cards");
-  console.log(formatCard(dealerFirstCard));
+  printHand(dealersHand);
   const playerResponse = prompt("Would you like to hit or stand? ");
   console.log(playerResponse);
   if (playerResponse === "hit") {
@@ -46,11 +52,15 @@ const run = async () => {
     // playersHand.push(await drawOneCard(cardData.deckId));
     playersHand.push(playerThirdCard);
     console.log("Players Cards");
-    console.log(handToString(playersHand));
+    printHand(playersHand);
     console.log("Dealers Cards");
-    console.log(formatCard(dealerFirstCard));
+    printHand(dealersHand);
   } else {
-    console.log("next");
+    dealersHand.push(dealerSecondCard);
+    console.log("Players Cards");
+    printHand(playersHand);
+    console.log("Dealers Cards");
+    printHand(dealersHand);
   }
 };
 
