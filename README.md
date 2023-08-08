@@ -7,3 +7,35 @@
 1. user chooses to hit to get a new card or stick with their current cards
 1. dealer hits until the sum of their cards are 17+
    show the result of the game
+
+Sample respons for draw card
+
+```
+{
+    "success": true,
+    "deck_id": "kxozasf3edqu",
+    "cards": [
+        {
+            "code": "6H",
+            "image": "https://deckofcardsapi.com/static/img/6H.png",
+            "images": {
+                          "svg": "https://deckofcardsapi.com/static/img/6H.svg",
+                          "png": "https://deckofcardsapi.com/static/img/6H.png"
+                      },
+            "value": "6",
+            "suit": "HEARTS"
+        },
+        {
+            "code": "5S",
+            "image": "https://deckofcardsapi.com/static/img/5S.png",
+            "images": {
+                          "svg": "https://deckofcardsapi.com/static/img/5S.svg",
+                          "png": "https://deckofcardsapi.com/static/img/5S.png"
+                      },
+            "value": "5",
+            "suit": "SPADES"
+        }
+    ],
+    "remaining": 50
+}
+```

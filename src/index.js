@@ -22,7 +22,29 @@ function printHand(cards) {
 
 function checkForWinner() {}
 
-function scoreForHand(hand) {}
+// run through an array of cards
+// if a value in the array equals a picture card, convert it to its numerical value
+function convertCardToValue(card) {
+  if (
+    card.value === "QUEEN" ||
+    card.value === "JACK" ||
+    card.value === "KING"
+  ) {
+    return 10;
+  } else if (card.value === "ACE") {
+    return 11;
+  } else return Number(card.value);
+}
+
+// work out the score of the hand
+// inputs: a hand of cards (array of cards)
+// output: the total score
+function scoreForHand(hand) {
+  const oneCard = hand[0];
+  const twoCard = hand[1];
+  const added = convertCardToValue(oneCard) + convertCardToValue(twoCard);
+  console.log(added);
+}
 
 const run = async () => {
   const playersHand = [];
@@ -37,6 +59,7 @@ const run = async () => {
   const dealerSecondCard = await drawOneCard(cardData.deckId);
   playersHand.push(playerFirstCard);
   playersHand.push(playerSecondCard);
+  scoreForHand(playersHand);
   console.log("Players Cards");
   printHand(playersHand);
   // console.log(handToString(playersHand));
@@ -47,6 +70,7 @@ const run = async () => {
   printHand(dealersHand);
   const playerResponse = prompt("Would you like to hit or stand? ");
   console.log(playerResponse);
+
   if (playerResponse === "hit") {
     const playerThirdCard = await drawOneCard(cardData.deckId);
     // playersHand.push(await drawOneCard(cardData.deckId));
