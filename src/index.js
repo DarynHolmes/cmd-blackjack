@@ -33,17 +33,18 @@ function convertCardToValue(card) {
     return 10;
   } else if (card.value === "ACE") {
     return 11;
-  } else return Number(card.value);
+  }
+  return Number(card.value);
 }
 
 // work out the score of the hand
 // inputs: a hand of cards (array of cards)
 // output: the total score
 function scoreForHand(hand) {
-  const oneCard = hand[0];
-  const twoCard = hand[1];
-  const added = convertCardToValue(oneCard) + convertCardToValue(twoCard);
-  console.log(added);
+  const score = hand.reduce((scoreValue, card) => {
+    return scoreValue + convertCardToValue(card);
+  }, 0);
+  return score;
 }
 
 const run = async () => {
@@ -57,14 +58,10 @@ const run = async () => {
   const dealerFirstCard = await drawOneCard(cardData.deckId);
   const playerSecondCard = await drawOneCard(cardData.deckId);
   const dealerSecondCard = await drawOneCard(cardData.deckId);
-  playersHand.push(playerFirstCard);
-  playersHand.push(playerSecondCard);
+  playersHand.push(playerFirstCard, playerSecondCard);
   scoreForHand(playersHand);
   console.log("Players Cards");
   printHand(playersHand);
-  // console.log(handToString(playersHand));
-  // console.log(formatCard(playerFirstCard));
-  // console.log(formatCard(playerSecondCard));
   dealersHand.push(dealerFirstCard);
   console.log("Dealers Cards");
   printHand(dealersHand);
@@ -83,8 +80,10 @@ const run = async () => {
     dealersHand.push(dealerSecondCard);
     console.log("Players Cards");
     printHand(playersHand);
+    console.log(`Players hand value: ${scoreForHand(playersHand)}`);
     console.log("Dealers Cards");
     printHand(dealersHand);
+    console.log(`Dealers hand value: ${scoreForHand(dealersHand)}`);
   }
 };
 
