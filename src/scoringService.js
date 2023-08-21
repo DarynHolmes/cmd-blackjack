@@ -18,4 +18,16 @@ function convertCardToValue(card) {
   return Number(card.value);
 }
 
+function compareScores(dealerCardsTotal, playerCardsTotal) {
+  // check who is bust 
+  if (playerCardsTotal > 21) {
+    return 'playerBust'
+  }
+  // player has higher hand
+  // poss one player wins ()
+  // deal with a bust
+  // poss two dealer wins ()
+  // push
+}
+
 module.exports = { scoreForHand, convertCardToValue };
