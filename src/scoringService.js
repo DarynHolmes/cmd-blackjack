@@ -18,10 +18,9 @@ function convertCardToValue(card) {
   return Number(card.value);
 }
 
-
 // Goal: determine who wins
 // input: total score of the dealer and player
-// output: the winner, will be PLAYER or DEALER
+// output: the winner, will be PLAYER or DEALER or PUSH
 
 // dealerCardsTotal = 2, playerCardsTotal = 55
 function compareScores(dealerCardsTotal, playerCardsTotal) {
@@ -34,16 +33,16 @@ function compareScores(dealerCardsTotal, playerCardsTotal) {
     return "PLAYER";
   }
   // player has higher hand
-  if(dealerCardsTotal > playerCardsTotal) {
-    return "DEALER"
+  if (dealerCardsTotal > playerCardsTotal) {
+    return "DEALER";
   }
   // poss two dealer wins ()
-  if(playerCardsTotal > dealerCardsTotal) {
-    return "PLAYER"
+  if (playerCardsTotal > dealerCardsTotal) {
+    return "PLAYER";
   }
   // push
-  if(playerCardsTotal === dealerCardsTotal) {
-    return "PUSH"
+  if (playerCardsTotal === dealerCardsTotal) {
+    return "PUSH";
   }
 }
 

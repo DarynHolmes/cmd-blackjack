@@ -2,6 +2,11 @@ const prompt = require("prompt-sync")();
 const shuffleCards = require("./shuffleCards");
 const dealCardToPlayerFaceUp = require("./dealingCard");
 const drawOneCard = require("./drawCards");
+const {
+  scoreForHand,
+  convertCardToValue,
+  compareScores,
+} = require("./scoringService");
 
 // a function
 // takes an input of a card
@@ -22,31 +27,6 @@ function printHand(cards) {
 
 function checkForWinner() {}
 
-// run through an array of cards
-// if a value in the array equals a picture card, convert it to its numerical value
-function convertCardToValue(card) {
-  if (
-    card.value === "QUEEN" ||
-    card.value === "JACK" ||
-    card.value === "KING"
-  ) {
-    return 10;
-  } else if (card.value === "ACE") {
-    return 11;
-  }
-  return Number(card.value);
-}
-
-// work out the score of the hand
-// inputs: a hand of cards (array of cards)
-// output: the total score
-function scoreForHand(hand) {
-  const score = hand.reduce((scoreValue, card) => {
-    return scoreValue + convertCardToValue(card);
-  }, 0);
-  return score;
-}
-
 const run = async () => {
   const playersHand = [];
   const dealersHand = [];
@@ -65,26 +45,43 @@ const run = async () => {
   dealersHand.push(dealerFirstCard);
   console.log("Dealers Cards");
   printHand(dealersHand);
-  const playerResponse = prompt("Would you like to hit or stand? ");
-  console.log(playerResponse);
 
-  if (playerResponse === "hit") {
-    const playerThirdCard = await drawOneCard(cardData.deckId);
-    // playersHand.push(await drawOneCard(cardData.deckId));
-    playersHand.push(playerThirdCard);
-    console.log("Players Cards");
+  // keep "looping" until the player chooses not to hit (to stand)
+  // for loop is used when you know how many times you want to loop e.g. on an array
+  // if you don't know, then you can use a while, or a do while
+  // a do while will always do the looop at least once
+  // a while loop, might not do the loop at all
+
+  let playerResponse = prompt("Would you like to hit or stand? ");
+  while (playerResponse === "hit" && scoreForHand(playersHand) <= 21) {
+    const playerNewCard = await drawOneCard(cardData.deckId);
+    playersHand.push(playerNewCard);
     printHand(playersHand);
-    console.log("Dealers Cards");
-    printHand(dealersHand);
-  } else {
-    dealersHand.push(dealerSecondCard);
-    console.log("Players Cards");
-    printHand(playersHand);
-    console.log(`Players hand value: ${scoreForHand(playersHand)}`);
-    console.log("Dealers Cards");
-    printHand(dealersHand);
-    console.log(`Dealers hand value: ${scoreForHand(dealersHand)}`);
+    playerResponse = prompt("Would you like to hit or stand? ");
   }
+
+  // let playerResponse;
+  // do {
+  //   playerResponse = prompt("Would you like to hit or stand? ");
+  //   if (playerResponse === "hit") {
+  //     const playerNewCard = await drawOneCard(cardData.deckId);
+  //     playersHand.push(playerNewCard);
+  //     printHand(playersHand);
+  //   }
+  // } while (playerResponse === "hit" && scoreForHand(playersHand) <= 21);
+
+  console.log("Players Cards");
+  printHand(playersHand);
+  console.log(`Players hand value: ${scoreForHand(playersHand)}`);
+  console.log("Dealers Cards");
+  dealersHand.push(dealerSecondCard);
+  printHand(dealersHand);
+  console.log(`Dealers hand value: ${scoreForHand(dealersHand)}`);
+  const winner = compareScores(
+    scoreForHand(dealersHand),
+    scoreForHand(playersHand)
+  );
+  console.log("WHO WON", winner);
 };
 
 run();
