@@ -18,15 +18,36 @@ function convertCardToValue(card) {
   return Number(card.value);
 }
 
+
+// Goal: determine who wins
+// input: total score of the dealer and player
+// output: the winner, will be PLAYER or DEALER
+
+// dealerCardsTotal = 2, playerCardsTotal = 55
 function compareScores(dealerCardsTotal, playerCardsTotal) {
+  // player went bust
   if (playerCardsTotal > 21) {
     return "DEALER";
   }
-  // player has higher hand
-  // poss one player wins ()
   // deal with a bust
+  if (dealerCardsTotal > 21) {
+    return "PLAYER";
+  }
+  // player has higher hand
+  if(dealerCardsTotal > playerCardsTotal) {
+    return "DEALER"
+  }
   // poss two dealer wins ()
+  if(playerCardsTotal > dealerCardsTotal) {
+    return "PLAYER"
+  }
   // push
+  if(playerCardsTotal === dealerCardsTotal) {
+    return "PUSH"
+  }
 }
 
 module.exports = { scoreForHand, convertCardToValue, compareScores };
+
+// const num = 2
+// compareScores(num, 55)
