@@ -19,9 +19,8 @@ function convertCardToValue(card) {
 }
 
 function compareScores(dealerCardsTotal, playerCardsTotal) {
-  // check who is bust 
   if (playerCardsTotal > 21) {
-    return 'playerBust'
+    return "DEALER";
   }
   // player has higher hand
   // poss one player wins ()
@@ -30,4 +29,4 @@ function compareScores(dealerCardsTotal, playerCardsTotal) {
   // push
 }
 
-module.exports = { scoreForHand, convertCardToValue };
+module.exports = { scoreForHand, convertCardToValue, compareScores };

@@ -1,4 +1,8 @@
-const { convertCardToValue, scoreForHand } = require("./scoringService");
+const {
+  convertCardToValue,
+  scoreForHand,
+  compareScores,
+} = require("./scoringService");
 
 describe("scoring service", () => {
   describe("convertCardToValue", () => {
@@ -41,14 +45,24 @@ describe("scoring service", () => {
           suit: "HEARTS",
         },
         {
-          value: "JACK",
-          suit: "HEARTS",
+          value: 6,
+          suit: "SPADES",
         },
       ];
 
       const actual = scoreForHand(testHand);
 
-      expect(actual).toEqual(20);
+      expect(actual).toEqual(16);
+    });
+  });
+  describe("compareScores", () => {
+    it("compares scores of dealer and player", () => {
+      const playerScore = 20;
+      const dealerScore = 18;
+
+      const actual = compareScores(playerScore, dealerScore);
+
+      expect(actual).toEqual("PLAYER");
     });
   });
 });
