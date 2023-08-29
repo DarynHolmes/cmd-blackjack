@@ -38,6 +38,7 @@ const run = async () => {
   const dealerFirstCard = await drawOneCard(cardData.deckId);
   const playerSecondCard = await drawOneCard(cardData.deckId);
   const dealerSecondCard = await drawOneCard(cardData.deckId);
+
   playersHand.push(playerFirstCard, playerSecondCard);
   scoreForHand(playersHand);
   console.log("Players Cards");
@@ -60,22 +61,18 @@ const run = async () => {
     playerResponse = prompt("Would you like to hit or stand? ");
   }
 
-  // let playerResponse;
-  // do {
-  //   playerResponse = prompt("Would you like to hit or stand? ");
-  //   if (playerResponse === "hit") {
-  //     const playerNewCard = await drawOneCard(cardData.deckId);
-  //     playersHand.push(playerNewCard);
-  //     printHand(playersHand);
-  //   }
-  // } while (playerResponse === "hit" && scoreForHand(playersHand) <= 21);
-
   console.log("Players Cards");
   printHand(playersHand);
   console.log(`Players hand value: ${scoreForHand(playersHand)}`);
   console.log("Dealers Cards");
   dealersHand.push(dealerSecondCard);
   printHand(dealersHand);
+
+  while (scoreForHand(dealersHand) <= 17) {
+    const dealerNewCard = await drawOneCard(cardData.deckId);
+    dealersHand.push(dealerNewCard);
+    printHand(dealersHand);
+  }
   console.log(`Dealers hand value: ${scoreForHand(dealersHand)}`);
   const winner = compareScores(
     scoreForHand(dealersHand),

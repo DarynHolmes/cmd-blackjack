@@ -1,3 +1,27 @@
+// ace can be 1 or 11,
+// therefore A, 10
+// min score 11
+// max score 21
+// final score: 21 (highest when not bust)
+
+// therefore A, A, 4, 4
+// min score 10
+// max score 30
+// final score: 20  (first Ace is 1, second is 11)
+
+// therefore A, A, 6, 4
+// min score 12
+// max score 32
+// final score: 12  (first Ace is 1, second is 1, or you would go bust)
+
+// the player is bust when the min score is above 21
+
+// when working out final score
+// get the highest score that is not bust, when possible
+
+// check each card if its an ACE
+// the check the hand value of cards that are not an ace
+// if its greater than 11 ACE = 1 if less ACE is 11
 function scoreForHand(hand) {
   const score = hand.reduce((scoreValue, card) => {
     return scoreValue + convertCardToValue(card);
