@@ -60,7 +60,7 @@ describe("scoring service", () => {
       const playerScore = 20;
       const dealerScore = 18;
 
-      const actual = compareScores(playerScore, dealerScore);
+      const actual = compareScores(dealerScore, playerScore);
 
       expect(actual).toEqual("PLAYER");
     });
